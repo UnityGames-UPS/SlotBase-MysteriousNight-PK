@@ -47,6 +47,13 @@ public class GambleController : MonoBehaviour
     internal double gambleAmount;
 
     [SerializeField] internal bool isAutoSpinOn;
+    private string[] cardSuits = new string[] { "Hearts", "Diamonds", "Clubs", "Spades" };
+    private cardStruct dealerCard = new cardStruct();
+    private cardStruct playerCard = new cardStruct();
+    private cardStruct spare1Card = new cardStruct();
+    private cardStruct spare2Card = new cardStruct();
+
+    [SerializeField] private Button[] cardsButtons;
 
     #region Initialization
 
@@ -106,34 +113,30 @@ public class GambleController : MonoBehaviour
     // Starts the gamble game
     void StartGamblegame(bool isRepeat = false)
     {
-        if (GambleEnd_Object) GambleEnd_Object.SetActive(false); // Hide end screen
-        GambleTweeningAnim(false); // Stop animation
-
-        if (!isAutoSpinOn)
-        {
-            isAutoSpinOn = slotController.IsAutoSpin;
-        }
-
-        slotController.DeactivateGamble(); // Deactivate the gamble slot
-        winamount.text = "0"; // Reset win amount text
-
+        if (GambleEnd_Object) GambleEnd_Object.SetActive(false);
+        GambleTweeningAnim(false);
+        slotController.DeactivateGamble();
         if (!isRepeat)
         {
-            winamount.text = "0"; // Reset win amount on non-repeat
+            winamount.text = "0";
         }
-
-        if (audioController) audioController.PlayButtonAudio(); // Play button click audio
-        if (gamble_game) gamble_game.SetActive(true); // Activate gamble game object
-        loadingScreen.SetActive(true); // Show loading screen
-
-        StartCoroutine(LoadingRoutine()); // Start loading routine
-        StartCoroutine(GambleCoroutine()); // Start gamble coroutine
+        if (audioController) audioController.PlayButtonAudio();
+        if (gamble_game) gamble_game.SetActive(true);
+        SetCardButtonsInteractable(true);
+        loadingScreen.SetActive(true);
+        StartCoroutine(LoadingRoutine());
+        if (!isRepeat) socketManager.OnGamble();
+        //  StartCoroutine(GambleCoroutine(isRepeat));
+        // StartCoroutine(GambleCoroutine()); // Start gamble coroutine
     }
 
     // Resets the game and collects winnings
     private void OnReset()
     {
         if (slotController) slotController.GambleCollect(); // Collect winnings
+        socketManager.resultData.payload.winAmount = socketManager.GambleData.payload.winAmount;
+        socketManager.playerdata.balance = socketManager.GambleData.player.balance;
+        slotController.updateBalance();
         if (isAutoSpinOn)
         {
             isAutoSpinOn = false;
@@ -160,7 +163,7 @@ public class GambleController : MonoBehaviour
         // Reset dealer's card
         DealerCard_Script.Card_Button.image.sprite = cardCover;
         DealerCard_Script.once = false;
-
+        winamount.text = "0";
         toggleDoubleButton(false); // Disable double button
     }
 
@@ -171,35 +174,86 @@ public class GambleController : MonoBehaviour
     // Compute the card sprites based on the received message
     private void ComputeCards()
     {
-        highcard_Sprite = CardSet(socketManager.myMessage.highCard.suit, socketManager.myMessage.highCard.value);
-        lowcard_Sprite = CardSet(socketManager.myMessage.lowCard.suit, socketManager.myMessage.lowCard.value);
-        spare1card_Sprite = CardSet(socketManager.myMessage.exCards[0].suit, socketManager.myMessage.exCards[0].value);
-        spare2card_Sprite = CardSet(socketManager.myMessage.exCards[1].suit, socketManager.myMessage.exCards[1].value);
+        // highcard_Sprite = CardSet(socketManager.myMessage.highCard.suit, socketManager.myMessage.highCard.value);
+        // lowcard_Sprite = CardSet(socketManager.myMessage.lowCard.suit, socketManager.myMessage.lowCard.value);
+        // spare1card_Sprite = CardSet(socketManager.myMessage.exCards[0].suit, socketManager.myMessage.exCards[0].value);
+        // spare2card_Sprite = CardSet(socketManager.myMessage.exCards[1].suit, socketManager.myMessage.exCards[1].value);
+
+
+        dealerCard = ChoseARandomeCard(socketManager.GambleData.payload.cards.dealerCard - 1);
+        playerCard = ChoseARandomeCard(socketManager.GambleData.payload.cards.playerCard - 1);
+        spare1Card = FindUniqueCard();
+        spare2Card = FindUniqueCard();
+        Debug.Log($" Dealer :" + socketManager.GambleData.payload.cards.dealerCard + "Player  " + socketManager.GambleData.payload.cards.playerCard);
+
+
+        highcard_Sprite = CardSet(dealerCard.suit, dealerCard.value);
+        lowcard_Sprite = CardSet(playerCard.suit, playerCard.value);
+        spare1card_Sprite = CardSet(spare1Card.suit, spare1Card.value);
+        spare2card_Sprite = CardSet(spare2Card.suit, spare2Card.value);
     }
 
-    // Determines the sprite for a given card suit and value
-    private Sprite CardSet(string suit, string value)
+    private Sprite CardSet(string suit, int value)
     {
+
         Sprite tempSprite = null;
         switch (suit.ToUpper())
         {
             case "HEARTS":
-                tempSprite = GetCardSprite(HeartSpriteList, value);
+                tempSprite = HeartSpriteList[value];
                 break;
             case "DIAMONDS":
-                tempSprite = GetCardSprite(DiamondSpriteList, value);
+                tempSprite = DiamondSpriteList[value];
                 break;
             case "CLUBS":
-                tempSprite = GetCardSprite(ClubSpriteList, value);
+                tempSprite = ClubSpriteList[value];
                 break;
             case "SPADES":
-                tempSprite = GetCardSprite(SpadeSpriteList, value);
+                tempSprite = SpadeSpriteList[value];
                 break;
             default:
                 Debug.LogError("Invalid Suit: " + suit);
                 break;
         }
         return tempSprite;
+    }
+
+    private cardStruct ChoseARandomeCard(int val = -1)
+    {
+        cardStruct cardx = new cardStruct();
+        string suit;
+        int value;
+
+        int index = UnityEngine.Random.Range(0, cardSuits.Length);
+        suit = cardSuits[index];
+
+        if (val == -1)
+        {
+            value = UnityEngine.Random.Range(0, 13);
+
+        }
+        else
+        {
+            value = val;
+        }
+        cardx.suit = suit;
+        cardx.value = value;
+        Debug.Log($"ChoseARandomeCard: {cardx.suit} {cardx.value}");
+        return cardx;
+    }
+    private cardStruct FindUniqueCard()
+    {
+        cardStruct newCard = null;
+        newCard = ChoseARandomeCard();
+
+        if (newCard == dealerCard && newCard == playerCard)
+        {
+            return FindUniqueCard();
+        }
+        else
+        {
+            return newCard;
+        }
     }
 
     // Helper function to get the correct sprite from a sprite list based on value
@@ -222,21 +276,20 @@ public class GambleController : MonoBehaviour
     #region Coroutines
 
     // Main coroutine for handling the gamble process
-    IEnumerator GambleCoroutine()
+    public IEnumerator GambleCoroutine(bool isRepeate = false)
     {
-        // Reset all card states
         for (int i = 0; i < allcards.Count; i++)
         {
             allcards[i].once = false;
         }
 
-        socketManager.OnGamble(); // Send gamble request
-
-        yield return new WaitUntil(() => socketManager.isResultdone); // Wait for result
-        ComputeCards(); // Compute card sprites
-        gambleStart = true; // Mark gamble as started
+        if (isRepeate) socketManager.GambleDraw();
+        else socketManager.OnGamble(); // Send gamble request 
+        Debug.Log($"Gamble coroutine styarted ");
+        yield return new WaitUntil(() => socketManager.isResultdone);
+        ComputeCards();
+        gambleStart = true;
     }
-
     // Coroutine for handling the loading screen
     //IEnumerator loadingRoutine()
     //{
@@ -256,20 +309,20 @@ public class GambleController : MonoBehaviour
 
     IEnumerator LoadingRoutine()
     {
-        foreach(var i in progressDots)
+        foreach (var i in progressDots)
         {
             i.SetActive(true);
             yield return new WaitForSeconds(0.15f);
         }
         yield return new WaitForSeconds(.2f);
-        yield return new WaitUntil(() => gambleStart);
+        //  yield return new WaitUntil(() => gambleStart);
         loadingScreen.SetActive(false);
         ResetProgressDots();
     }
 
     private void ResetProgressDots()
     {
-        foreach(var i in progressDots)
+        foreach (var i in progressDots)
         {
             i.SetActive(false);
         }
@@ -290,7 +343,9 @@ public class GambleController : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         gambleStart = false;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1f);
+        socketManager.resultData.payload.winAmount = socketManager.GambleData.payload.winAmount;
+        socketManager.playerdata.balance = socketManager.GambleData.player.balance;
         slotController.updateBalance();
         if (gamble_game) gamble_game.SetActive(false);
         allcards.ForEach((element) =>
@@ -315,16 +370,18 @@ public class GambleController : MonoBehaviour
     // Get the correct card sprite based on the player's result
     internal Sprite GetCard()
     {
-        if (socketManager.myMessage.playerWon)
-        {
-            if (DealerCard_Script) DealerCard_Script.cardImage = lowcard_Sprite;
-            return highcard_Sprite;
-        }
-        else
-        {
-            if (DealerCard_Script) DealerCard_Script.cardImage = highcard_Sprite;
-            return lowcard_Sprite;
-        }
+        // if (socketManager.myMessage.playerWon)
+        // {
+        //     if (DealerCard_Script) DealerCard_Script.cardImage = lowcard_Sprite;
+        //     return highcard_Sprite;
+        // }
+        // else
+        // {
+        //     if (DealerCard_Script) DealerCard_Script.cardImage = highcard_Sprite;
+        //     return lowcard_Sprite;
+        // }
+        if (DealerCard_Script) DealerCard_Script.cardImage = highcard_Sprite;
+        return lowcard_Sprite;
     }
 
     // Flip all the cards when the game ends
@@ -351,9 +408,9 @@ public class GambleController : MonoBehaviour
 
         if (DealerCard_Script) DealerCard_Script.FlipMyObject();
 
-        if (socketManager.myMessage.playerWon)
+        if (socketManager.GambleData.payload.playerWon)
         {
-            winamount.text = "YOU WIN\n" + socketManager.myMessage.currentWining.ToString();
+            winamount.text = "YOU WIN\n" + socketManager.GambleData.payload.winAmount.ToString();
             if (GambleEnd_Object) GambleEnd_Object.SetActive(true);
         }
         else
@@ -396,5 +453,19 @@ public class GambleController : MonoBehaviour
         }
     }
 
+    internal void SetCardButtonsInteractable(bool interactable)
+    {
+        foreach (Button btn in cardsButtons)
+        {
+            btn.interactable = interactable;
+        }
+    }
+
+
     #endregion
+}
+public class cardStruct
+{
+    public string suit;
+    public int value;
 }

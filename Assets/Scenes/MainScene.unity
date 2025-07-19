@@ -406,7 +406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5e47b6da1ed4d549cdfd57e72a8200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotManager: {fileID: 0}
+  slotManager: {fileID: 2046803210}
   payManager: {fileID: 963807277}
   _ConnectedLine: {fileID: 915808790}
   num: 8
@@ -2451,7 +2451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5e47b6da1ed4d549cdfd57e72a8200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotManager: {fileID: 0}
+  slotManager: {fileID: 2046803210}
   payManager: {fileID: 963807277}
   _ConnectedLine: {fileID: 1606668166}
   num: 1
@@ -3256,7 +3256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5e47b6da1ed4d549cdfd57e72a8200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotManager: {fileID: 0}
+  slotManager: {fileID: 2046803210}
   payManager: {fileID: 963807277}
   _ConnectedLine: {fileID: 1413704182}
   num: 5
@@ -5214,6 +5214,8 @@ MonoBehaviour:
   _bonusManager: {fileID: 1883716176}
   audioController: {fileID: 3828329615797410143}
   isOpen: 0
+  socketmanager: {fileID: 500036492}
+  chestIndex: 4
 --- !u!1 &408326938
 GameObject:
   m_ObjectHideFlags: 0
@@ -5779,7 +5781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5e47b6da1ed4d549cdfd57e72a8200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotManager: {fileID: 0}
+  slotManager: {fileID: 2046803210}
   payManager: {fileID: 963807277}
   _ConnectedLine: {fileID: 1467706029}
   num: 9
@@ -6550,9 +6552,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotManager: {fileID: 2046803210}
   uIManager: {fileID: 377874625}
-  bonusdata: []
   _jsManager: {fileID: 500036493}
-  testToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDgzZDdkYTI3YmY5MDI0NDNlYjRkZSIsInVzZXJuYW1lIjoiZGFyc2hhbiIsInJvbGUiOiJwbGF5ZXIiLCJpYXQiOjE3MzYyMjc2MDgsImV4cCI6MTczNjgzMjQwOH0.4YJX3ZB0mMikbnJmOw3HV21L994XI1fy_7htraeE1-k
+  testToken: 891cfd0239e9429f9c7266203030f327
   JSManager: {fileID: 1247381830}
 --- !u!114 &500036493
 MonoBehaviour:
@@ -6771,7 +6772,7 @@ GameObject:
   m_Component:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
-  - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6779,14 +6780,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &519420029
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -6853,6 +6846,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &519420033
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 0
 --- !u!1 &536931550
 GameObject:
   m_ObjectHideFlags: 0
@@ -7649,7 +7650,6 @@ MonoBehaviour:
   winamount: {fileID: 1183809037}
   slotController: {fileID: 2046803210}
   HeartSpriteList:
-  - {fileID: 21300000, guid: 73a8fa3f8a9504e4893b6b894579c436, type: 3}
   - {fileID: 21300000, guid: 050809843aa874676a48d6ea65a333c5, type: 3}
   - {fileID: 21300000, guid: 0f833f56ae5034156b8d12ed301272e2, type: 3}
   - {fileID: 21300000, guid: 6716284185e6c462bb11e5e9926f45fb, type: 3}
@@ -7660,10 +7660,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 558fb49ed091e4102bf5040df9c35fb4, type: 3}
   - {fileID: 21300000, guid: b41476df3828b421693bcd8bcbc84f92, type: 3}
   - {fileID: 21300000, guid: b20fc4325e9a94ca7b094160525763ef, type: 3}
-  - {fileID: 21300000, guid: 359f08519039f436f82a5feca08416f8, type: 3}
   - {fileID: 21300000, guid: 64ef901ec085c4fff9e29d7b112716cf, type: 3}
+  - {fileID: 21300000, guid: 359f08519039f436f82a5feca08416f8, type: 3}
+  - {fileID: 21300000, guid: 73a8fa3f8a9504e4893b6b894579c436, type: 3}
   ClubSpriteList:
-  - {fileID: 21300000, guid: e14064fc8c6aa4990b6df6e7141c9970, type: 3}
   - {fileID: 21300000, guid: d7447a18a6a3142ce816b6c5b9f984fc, type: 3}
   - {fileID: 21300000, guid: 1c79f7595483a47a2875ef79ec9299c8, type: 3}
   - {fileID: 21300000, guid: 793dba43935514d919c1c57b5a951482, type: 3}
@@ -7674,10 +7674,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8078a10de0a9b4a909df438e753b6aae, type: 3}
   - {fileID: 21300000, guid: d4977521eaeda47bc84267567eacf54e, type: 3}
   - {fileID: 21300000, guid: 1a06cc20a37c844758444260e421047f, type: 3}
-  - {fileID: 21300000, guid: ced89ccdd4f8440b38b9cd5026660a33, type: 3}
   - {fileID: 21300000, guid: f9c2a69ef4ebd4a98928342d37186d55, type: 3}
+  - {fileID: 21300000, guid: ced89ccdd4f8440b38b9cd5026660a33, type: 3}
+  - {fileID: 21300000, guid: e14064fc8c6aa4990b6df6e7141c9970, type: 3}
   SpadeSpriteList:
-  - {fileID: 21300000, guid: 9aee11e3ba47a45b1b502a5b08af0d66, type: 3}
   - {fileID: 21300000, guid: 46f54b5166c3a41c09dd6bbff9f77f5c, type: 3}
   - {fileID: 21300000, guid: de962e51c3a8a40119fe42d5bfe7159f, type: 3}
   - {fileID: 21300000, guid: cb0b02eec16a34a8f9f1263f92c6ae00, type: 3}
@@ -7688,10 +7688,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d73eb2f172ede46cb9a396be1e599381, type: 3}
   - {fileID: 21300000, guid: 7f1b2a57833bd489e9f98b7b3d2b306a, type: 3}
   - {fileID: 21300000, guid: 90b22e90a0105430fb4eaf26d11221b4, type: 3}
-  - {fileID: 21300000, guid: c66a0a7ad85d7449dbf0e80eb240937d, type: 3}
   - {fileID: 21300000, guid: 47440e0eae64e4b918cf1006e448f91e, type: 3}
+  - {fileID: 21300000, guid: c66a0a7ad85d7449dbf0e80eb240937d, type: 3}
+  - {fileID: 21300000, guid: 9aee11e3ba47a45b1b502a5b08af0d66, type: 3}
   DiamondSpriteList:
-  - {fileID: 21300000, guid: 406fea7b489834b8e9250fb21d9f3e84, type: 3}
   - {fileID: 21300000, guid: a4e372f89950d42129baaed5485d71c6, type: 3}
   - {fileID: 21300000, guid: ee337b585abdb48aa8acf20c83c6ad77, type: 3}
   - {fileID: 21300000, guid: 443ced307a3b743a59e85b063f0396b6, type: 3}
@@ -7702,8 +7702,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7c0a79e8e5de14d3dbee0221058077eb, type: 3}
   - {fileID: 21300000, guid: 58418e0afb9054a17a5e2bf80030354f, type: 3}
   - {fileID: 21300000, guid: dba61ae5d5cd747ecbd196db932ef9dd, type: 3}
-  - {fileID: 21300000, guid: 31a2008e8c1874a26abbc085ad6288ea, type: 3}
   - {fileID: 21300000, guid: ebfa7881899eb4776b818fbaa60cde40, type: 3}
+  - {fileID: 21300000, guid: 31a2008e8c1874a26abbc085ad6288ea, type: 3}
+  - {fileID: 21300000, guid: 406fea7b489834b8e9250fb21d9f3e84, type: 3}
   cardCover: {fileID: 21300000, guid: 6c9c321f32da344bb90353259d6aa453, type: 3}
   DealerCard_Script: {fileID: 1444025794}
   GambleEnd_Object: {fileID: 647123938}
@@ -7733,6 +7734,10 @@ MonoBehaviour:
   - {fileID: 656139856}
   - {fileID: 803267441}
   isAutoSpinOn: 0
+  cardsButtons:
+  - {fileID: 380178457}
+  - {fileID: 365938398}
+  - {fileID: 693794289}
 --- !u!4 &579669952
 Transform:
   m_ObjectHideFlags: 0
@@ -8635,7 +8640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5e47b6da1ed4d549cdfd57e72a8200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotManager: {fileID: 0}
+  slotManager: {fileID: 2046803210}
   payManager: {fileID: 963807277}
   _ConnectedLine: {fileID: 1606668166}
   num: 1
@@ -9552,7 +9557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5e47b6da1ed4d549cdfd57e72a8200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotManager: {fileID: 0}
+  slotManager: {fileID: 2046803210}
   payManager: {fileID: 963807277}
   _ConnectedLine: {fileID: 1413704182}
   num: 5
@@ -10088,7 +10093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5e47b6da1ed4d549cdfd57e72a8200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotManager: {fileID: 0}
+  slotManager: {fileID: 2046803210}
   payManager: {fileID: 963807277}
   _ConnectedLine: {fileID: 1778859983}
   num: 2
@@ -12532,7 +12537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5e47b6da1ed4d549cdfd57e72a8200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotManager: {fileID: 0}
+  slotManager: {fileID: 2046803210}
   payManager: {fileID: 963807277}
   _ConnectedLine: {fileID: 944131428}
   num: 3
@@ -13885,6 +13890,7 @@ MonoBehaviour:
   - {fileID: 446818357}
   InitialLinePosition: {x: -410, y: 180}
   DontDestroyLines: 
+  slotmanager: {fileID: 2046803210}
 --- !u!4 &963807278
 Transform:
   m_ObjectHideFlags: 0
@@ -13964,6 +13970,8 @@ MonoBehaviour:
   _bonusManager: {fileID: 1883716176}
   audioController: {fileID: 3828329615797410143}
   isOpen: 0
+  socketmanager: {fileID: 500036492}
+  chestIndex: 1
 --- !u!1 &972593566
 GameObject:
   m_ObjectHideFlags: 0
@@ -14632,7 +14640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5e47b6da1ed4d549cdfd57e72a8200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotManager: {fileID: 0}
+  slotManager: {fileID: 2046803210}
   payManager: {fileID: 963807277}
   _ConnectedLine: {fileID: 1482776149}
   num: 6
@@ -14941,7 +14949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5e47b6da1ed4d549cdfd57e72a8200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotManager: {fileID: 0}
+  slotManager: {fileID: 2046803210}
   payManager: {fileID: 963807277}
   _ConnectedLine: {fileID: 1467706029}
   num: 9
@@ -17117,7 +17125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5e47b6da1ed4d549cdfd57e72a8200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotManager: {fileID: 0}
+  slotManager: {fileID: 2046803210}
   payManager: {fileID: 963807277}
   _ConnectedLine: {fileID: 1405249530}
   num: 4
@@ -17920,6 +17928,8 @@ MonoBehaviour:
   _bonusManager: {fileID: 1883716176}
   audioController: {fileID: 3828329615797410143}
   isOpen: 0
+  socketmanager: {fileID: 500036492}
+  chestIndex: 2
 --- !u!1 &1290305163
 GameObject:
   m_ObjectHideFlags: 0
@@ -18369,6 +18379,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1313422162}
   m_CullTransparentMesh: 1
+--- !u!1 &1316804266
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1316804267}
+  - component: {fileID: 1316804269}
+  - component: {fileID: 1316804268}
+  m_Layer: 5
+  m_Name: Bonus Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1316804267
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316804266}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1483849628}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1316804268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316804266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1316804269
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316804266}
+  m_CullTransparentMesh: 1
 --- !u!1 &1324728186
 GameObject:
   m_ObjectHideFlags: 0
@@ -18420,7 +18505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5e47b6da1ed4d549cdfd57e72a8200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotManager: {fileID: 0}
+  slotManager: {fileID: 2046803210}
   payManager: {fileID: 963807277}
   _ConnectedLine: {fileID: 915808790}
   num: 8
@@ -20674,6 +20759,7 @@ RectTransform:
   - {fileID: 824845694}
   - {fileID: 730784389}
   - {fileID: 923100093}
+  - {fileID: 1316804267}
   m_Father: {fileID: 895726569}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -22585,7 +22671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5e47b6da1ed4d549cdfd57e72a8200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotManager: {fileID: 0}
+  slotManager: {fileID: 2046803210}
   payManager: {fileID: 963807277}
   _ConnectedLine: {fileID: 1482776149}
   num: 6
@@ -24871,7 +24957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5e47b6da1ed4d549cdfd57e72a8200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotManager: {fileID: 0}
+  slotManager: {fileID: 2046803210}
   payManager: {fileID: 963807277}
   _ConnectedLine: {fileID: 1532368697}
   num: 7
@@ -25008,7 +25094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5e47b6da1ed4d549cdfd57e72a8200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotManager: {fileID: 0}
+  slotManager: {fileID: 2046803210}
   payManager: {fileID: 963807277}
   _ConnectedLine: {fileID: 944131428}
   num: 3
@@ -25596,6 +25682,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bonus_Object: {fileID: 1483849627}
   slotManager: {fileID: 2046803210}
+  socketmanager: {fileID: 500036492}
   BonusCases:
   - {fileID: 2013219520}
   - {fileID: 971581464}
@@ -25607,6 +25694,7 @@ MonoBehaviour:
   BonusWin: {fileID: 923100092}
   BonusWinObject: {fileID: 640055932}
   win_text: {fileID: 1394066809}
+  BonusHidePanel: {fileID: 1316804268}
 --- !u!4 &1883716177
 Transform:
   m_ObjectHideFlags: 0
@@ -26476,7 +26564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5e47b6da1ed4d549cdfd57e72a8200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotManager: {fileID: 0}
+  slotManager: {fileID: 2046803210}
   payManager: {fileID: 963807277}
   _ConnectedLine: {fileID: 1405249530}
   num: 4
@@ -27192,6 +27280,8 @@ MonoBehaviour:
   _bonusManager: {fileID: 1883716176}
   audioController: {fileID: 3828329615797410143}
   isOpen: 0
+  socketmanager: {fileID: 500036492}
+  chestIndex: 0
 --- !u!1 &2016666135
 GameObject:
   m_ObjectHideFlags: 0
@@ -27822,6 +27912,7 @@ MonoBehaviour:
   _bonusManager: {fileID: 1883716176}
   uiManager: {fileID: 377874625}
   gambleController: {fileID: 579669951}
+  BetCounter: 0
   audioController: {fileID: 3828329615797410143}
 --- !u!1 &2047775898
 GameObject:
@@ -28392,6 +28483,8 @@ MonoBehaviour:
   _bonusManager: {fileID: 1883716176}
   audioController: {fileID: 3828329615797410143}
   isOpen: 0
+  socketmanager: {fileID: 500036492}
+  chestIndex: 3
 --- !u!1 &2081059620
 GameObject:
   m_ObjectHideFlags: 0
@@ -28600,10 +28693,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5e47b6da1ed4d549cdfd57e72a8200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotManager: {fileID: 0}
+  slotManager: {fileID: 2046803210}
   payManager: {fileID: 963807277}
   _ConnectedLine: {fileID: 1778859983}
-  num: 0
+  num: 2
 --- !u!1 &2084596284
 GameObject:
   m_ObjectHideFlags: 0
@@ -28869,7 +28962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5e47b6da1ed4d549cdfd57e72a8200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotManager: {fileID: 0}
+  slotManager: {fileID: 2046803210}
   payManager: {fileID: 963807277}
   _ConnectedLine: {fileID: 1532368697}
   num: 7
@@ -31163,7 +31256,7 @@ MonoBehaviour:
   BonusLose_Audio: {fileID: 8300000, guid: f5561675baef14633bfd14d6e6bb314b, type: 3}
   NormalBg_Audio: {fileID: 8300000, guid: df74e77704592427eb36b4dd43bd936f, type: 3}
   BonusBg_Audio: {fileID: 8300000, guid: 497a47a3fac584c169aa195ce66703f5, type: 3}
-  TheListener: {fileID: 519420029}
+  TheListener: {fileID: 519420033}
 --- !u!222 &5287935815478762599
 CanvasRenderer:
   m_ObjectHideFlags: 0

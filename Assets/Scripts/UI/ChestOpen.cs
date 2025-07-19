@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Net.Sockets;
 
 public class ChestOpen : MonoBehaviour
 {
     
-    [SerializeField] private Button Chest;
+   public Button Chest;
     [SerializeField] private TMP_Text text;
     [SerializeField]
     private GameObject Chest_Opening;
@@ -31,11 +32,14 @@ public class ChestOpen : MonoBehaviour
 
     //[SerializeField]
     private SlotBehaviour slotManager;
-    private int value;
+    private double value;
+
+    [SerializeField] private SocketIOManager socketmanager;
+    [SerializeField] private int chestIndex;
     void Start()
     {
         if (Chest) Chest.onClick.RemoveAllListeners();
-        if (Chest) Chest.onClick.AddListener(OpenCase);
+        if (Chest) Chest.onClick.AddListener(()=> StartCoroutine(OpenCase()));
 
         if (FreeSpin_Button) FreeSpin_Button.onClick.RemoveAllListeners();
         if (FreeSpin_Button) FreeSpin_Button.onClick.AddListener(delegate { StartFreeSpins(FreeSpins); });
@@ -50,11 +54,16 @@ public class ChestOpen : MonoBehaviour
         imageAnimation.StopAnimation();
     }
 
-    void OpenCase()
+    IEnumerator OpenCase()
     {
-        if (isOpen) return;
-        if (_bonusManager.isOpening) return;
-        if (_bonusManager.isFinisdhed) return;
+        _bonusManager.BonusHidePanel.gameObject.SetActive(true);
+        if (isOpen) yield break;
+        if (_bonusManager.isOpening) yield break;
+        if (_bonusManager.isFinisdhed) yield break;
+        socketmanager.isResultdone = false;
+        socketmanager.AccumulateTapBonusResult(chestIndex);
+        yield return new WaitUntil(() => socketmanager.isResultdone);
+         _bonusManager.BonusHidePanel.gameObject.SetActive(false);
         PopulateCase();
         Chest_Opening.SetActive(true);
         Chest.gameObject.SetActive(false);
@@ -63,16 +72,20 @@ public class ChestOpen : MonoBehaviour
 
     void PopulateCase()
     {
-        value = _bonusManager.GetValue();
+        value = 0;
+
+        double payout = socketmanager.bonusData.payload.payout;
         print("value " + value);
-        if (value == 0)
+        if (payout > 0)
         {
-            text.text = "Game Over";
+            value = socketmanager.bonusData.payload.winAmount;
+            text.text = socketmanager.bonusData.payload.winAmount.ToString("f2");
         }
         else
         {
-            text.text = (value * _bonusManager.bet).ToString();
+            text.text = "Game Over";
         }
+       
     }
 
     IEnumerator setCase()
@@ -85,7 +98,8 @@ public class ChestOpen : MonoBehaviour
         text.gameObject.SetActive(true);
         isOpen = true;
 
-        _bonusManager.totalWin += (value * _bonusManager.bet);
+        _bonusManager.totalWin += value;
+        Debug.Log($"total Bonus Win :" + _bonusManager.totalWin);
         if (value == 0)
             _bonusManager.isFinisdhed = true;
 
@@ -95,6 +109,7 @@ public class ChestOpen : MonoBehaviour
             _bonusManager.GameOver();
         }
         _bonusManager.isOpening = false;
+        _bonusManager.BonusHidePanel.gameObject.SetActive(false);
     }
 
     private void StartFreeSpins(int spins)

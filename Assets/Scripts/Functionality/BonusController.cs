@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
+using Best.SocketIO;
 
 public class BonusController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class BonusController : MonoBehaviour
     private GameObject Bonus_Object;
     [SerializeField]
     private SlotBehaviour slotManager;
+    [SerializeField] SocketIOManager socketmanager;
     [SerializeField]
     private List<ChestOpen> BonusCases;
     [SerializeField]
@@ -29,13 +31,14 @@ public class BonusController : MonoBehaviour
     internal bool isFinisdhed;
     internal double bet { get; private set; }
     internal double totalWin;
+    public Image BonusHidePanel;
 
-    internal void ChestOpen(List<int> values,double betAmount)
+    internal void ChestOpen() //List<int> values,double betAmount
     {
         index = 0;
         CaseValues.Clear();
         CaseValues.TrimExcess();
-        CaseValues = values;
+        // CaseValues = values;
 
         foreach (ChestOpen cases in BonusCases)
         {
@@ -50,13 +53,13 @@ public class BonusController : MonoBehaviour
         //        CaseValues.Add(0);
         //    }
         //}
-        bet = betAmount;
+        //  bet = betAmount;
         StartBonus();
     }
 
     internal void GameOver()
     {
-        win_text.text = totalWin.ToString();
+        win_text.text = totalWin.ToString("f2");
 
         BonusWinObject.localScale = Vector3.zero;
         BonusWin.SetActive(true);
@@ -69,6 +72,8 @@ public class BonusController : MonoBehaviour
 
 
         }
+        socketmanager.resultData.payload.winAmount = socketmanager.bonusData.payload.winAmount;
+        socketmanager.resultData.player.balance = socketmanager.bonusData.player.balance;
         DOVirtual.DelayedCall(2f, () =>
         {
             slotManager.CheckPopups = false;
@@ -80,13 +85,9 @@ public class BonusController : MonoBehaviour
             totalWin = 0;
         });
 
-
-
-
-
     }
 
-    internal int GetValue()
+       internal int GetValue()
     {
         int value = 0;
 

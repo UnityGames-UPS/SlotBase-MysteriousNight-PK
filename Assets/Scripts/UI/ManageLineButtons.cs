@@ -28,21 +28,24 @@ public class ManageLineButtons : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
 	public void OnPointerEnter(PointerEventData eventData)
 	{
-		if (num <= payManager.currrentLineIndex)
-		{
-			isEnabled = true;
-		}
-		else
-		{
-			isEnabled = false;
-		}
-		if (isEnabled)
+		// if (num-1 <= payManager.currrentLineIndex)
+		// {
+		// 	Debug.Log($" lineeeee 0 :"+ num + "   "+ payManager.currentLineIndex);
+		// 	isEnabled = true;
+		// }
+		// else
+		// {
+		// 	Debug.Log($" lineeeee 1 :"+ num + "   "+ payManager.currentLineIndex);
+		// 	isEnabled = false;
+		// }
+		// if (isEnabled)
 			payManager.GeneratePayoutLinesBackend(num - 1);
 	}
 	public void OnPointerExit(PointerEventData eventData)
 	{
-		if (isEnabled)
-			payManager.ResetLines();
+		//if (isEnabled)
+		//payManager.ResetLines();
+		payManager.ResetStaticline();
 	}
 	public void OnPointerDown(PointerEventData eventData)
 	{
@@ -59,7 +62,8 @@ public class ManageLineButtons : MonoBehaviour, IPointerEnterHandler, IPointerEx
 		if (Application.platform == RuntimePlatform.WebGLPlayer && Application.isMobilePlatform)
 		{
 			Debug.Log("run on pointer up");
-			payManager.ResetLines();
+			//payManager.ResetLines();
+			payManager.ResetStaticline();
 			DOVirtual.DelayedCall(0.1f, () =>
 			{
 				this.gameObject.GetComponent<Button>().spriteState = default;

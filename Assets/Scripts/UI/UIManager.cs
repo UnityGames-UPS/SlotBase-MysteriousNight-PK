@@ -299,7 +299,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    internal void InitialiseUIData(string SupportUrl, string AbtImgUrl, string TermsUrl, string PrivacyUrl, Paylines symbolsText)
+    internal void InitialiseUIData(Paylines symbolsText)
     {
         PopulateSymbolsPayout(symbolsText);
     }
@@ -310,28 +310,28 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < SymbolsText.Length; i++)
         {
             string text = null;
-            if (paylines.symbols[i].Multiplier[0][0] != 0)
+            if (paylines.symbols[i].multiplier[0] != 0)
             {
-                text += paylines.symbols[i].Multiplier[0][0] + "x";
+                text += paylines.symbols[i].multiplier[0] + "x";
             }
-            if (paylines.symbols[i].Multiplier[1][0] != 0)
+            if (paylines.symbols[i].multiplier[1] != 0)
             {
-                text += "\n " + paylines.symbols[i].Multiplier[1][0] + "x";
+                text += "\n " + paylines.symbols[i].multiplier[1] + "x";
             }
-            if (paylines.symbols[i].Multiplier[2][0] != 0)
+            if (paylines.symbols[i].multiplier[2] != 0)
             {
-                text += "\n" + paylines.symbols[i].Multiplier[2][0] + "x";
+                text += "\n" + paylines.symbols[i].multiplier[2] + "x";
             }
             if (SymbolsText[i]) SymbolsText[i].text = text;
         }
 
         for (int i = 0; i < paylines.symbols.Count; i++)
         {
-            if (paylines.symbols[i].Name.ToUpper() == "WILD")
+            if (paylines.symbols[i].name.ToUpper() == "WILD")
             {
                 if (m_Wild_Text) m_Wild_Text.text = paylines.symbols[i].description.ToString();
             }
-            if (paylines.symbols[i].Name.ToUpper() == "BONUS")
+            if (paylines.symbols[i].name.ToUpper() == "BONUS")
             {
                 if (m_Bonus_Text) m_Bonus_Text.text = paylines.symbols[i].description.ToString();
             }

@@ -28,6 +28,8 @@ public class PayoutCalculation : MonoBehaviour
     [SerializeField] internal List<int> DontDestroyLines = new List<int>();
     GameObject TempObj = null;
 
+    [SerializeField] private SlotBehaviour slotmanager;
+
     internal void GeneratePayoutLinesBackend(int index = -1, bool DestroyFirst = true)
     {
 
@@ -56,7 +58,7 @@ public class PayoutCalculation : MonoBehaviour
     internal void SetButtonActive(int LineCounter)
     {
 
-        
+
         currrentLineIndex = LineCounter;
 
         for (int i = 0; i < LineCounter; i++)
@@ -76,7 +78,7 @@ public class PayoutCalculation : MonoBehaviour
 
     internal void ResetStaticLine()
     {
-        if(TempObj!=null)
+        if (TempObj != null)
         {
             TempObj.SetActive(false);
             TempObj = null;
@@ -89,6 +91,15 @@ public class PayoutCalculation : MonoBehaviour
         {
             child.SetActive(false);
         }
+    }
+
+    internal void ResetStaticline()
+    {
+        for (int i = 0; i < Lines_Object.Length; i++)
+        {
+            Lines_Object[i].SetActive(slotmanager.dynamicLinesIndex.Contains(i));
+        }
+
     }
 
 }
