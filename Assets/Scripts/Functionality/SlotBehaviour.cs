@@ -371,8 +371,8 @@ public class SlotBehaviour : MonoBehaviour
         if (audioController) audioController.PlayButtonAudio();
         BetCounter = SocketManager.initialData.bets.Count - 1;
         if (BetperLine_text) BetperLine_text.text = SocketManager.initialData.bets[BetCounter].ToString();
-        if (TotalBet_text) TotalBet_text.text = (SocketManager.initialData.bets[BetCounter] * SocketManager.initialData.Lines.Count).ToString();
-        currentTotalBet = SocketManager.initialData.bets[BetCounter] * SocketManager.initialData.Lines.Count;
+        if (TotalBet_text) TotalBet_text.text = (SocketManager.initialData.bets[BetCounter] * SocketManager.initialData.lines.Count).ToString();
+        currentTotalBet = SocketManager.initialData.bets[BetCounter] * SocketManager.initialData.lines.Count;
 
 
     }
@@ -650,15 +650,15 @@ public class SlotBehaviour : MonoBehaviour
 
         //yield return new WaitForSeconds(0.5f);
 
-        if (IsTurboOn || IsFreeSpin)
-        {
-            yield return new WaitForSeconds(0.1f);
-        }
-        else
+        // if (IsTurboOn || IsFreeSpin)
+        // {
+        //     yield return new WaitForSeconds(0.1f);
+        // }
+        if(!(IsTurboOn || IsFreeSpin))
         {
             for (int i = 0; i < 5; i++)
             {
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.35f);
                 if (StopSpinToggle)
                 {
                     break;

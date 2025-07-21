@@ -6553,7 +6553,7 @@ MonoBehaviour:
   slotManager: {fileID: 2046803210}
   uIManager: {fileID: 377874625}
   _jsManager: {fileID: 500036493}
-  testToken: 891cfd0239e9429f9c7266203030f327
+  testToken: fcbf848eea784f569acad688122fe618
   JSManager: {fileID: 1247381830}
 --- !u!114 &500036493
 MonoBehaviour:
