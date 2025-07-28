@@ -6551,8 +6551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotManager: {fileID: 2046803210}
   uIManager: {fileID: 377874625}
-  _jsManager: {fileID: 0}
-  testToken: fcbf848eea784f569acad688122fe618
+  testToken: d4326b3c8adb46afb376d5380368b6b2
   JSManager: {fileID: 1247381830}
 --- !u!1 &503406890
 GameObject:
@@ -16226,15 +16225,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b58887147c19347d3baa330c35e170a7, type: 2}
-  m_sharedMaterial: {fileID: 4293545952216918085, guid: b58887147c19347d3baa330c35e170a7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 82ff492c12dbb436a947e81f33d8da97, type: 2}
+  m_sharedMaterial: {fileID: -4559087540124535197, guid: 82ff492c12dbb436a947e81f33d8da97, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4281917695
+  m_fontColor: {r: 1, g: 0.8784314, b: 0.21960784, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
