@@ -6551,7 +6551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotManager: {fileID: 2046803210}
   uIManager: {fileID: 377874625}
-  testToken: d4326b3c8adb46afb376d5380368b6b2
+  testToken: 43d8be7841ff461b8c0ce71f25d8ea49
   JSManager: {fileID: 1247381830}
 --- !u!1 &503406890
 GameObject:
@@ -20812,7 +20812,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

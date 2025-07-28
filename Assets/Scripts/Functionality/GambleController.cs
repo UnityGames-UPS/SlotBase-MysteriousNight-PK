@@ -410,12 +410,12 @@ public class GambleController : MonoBehaviour
 
         if (socketManager.GambleData.payload.playerWon)
         {
-            winamount.text = "YOU WIN\n" + socketManager.GambleData.payload.winAmount.ToString();
+            winamount.text = "You Win\n" + socketManager.GambleData.payload.winAmount.ToString();
             if (GambleEnd_Object) GambleEnd_Object.SetActive(true);
         }
         else
         {
-            winamount.text = "YOU LOSE\n0";
+            winamount.text = "You Lose\n0";
             StartCoroutine(Collectroutine());
         }
     }
