@@ -55,6 +55,7 @@ public class UIManager : MonoBehaviour
     [Header("disconnection popup")]
     [SerializeField] private GameObject disconnecitonPopUp_object;
     [SerializeField] private Button disconnection_close;
+    [SerializeField] private GameObject reconnecitonPopUp_object;
 
     [Header("low balance popup")]
     [SerializeField] private GameObject LBPopup_Object;
@@ -111,10 +112,10 @@ public class UIManager : MonoBehaviour
         if (GameExit_Button) GameExit_Button.onClick.AddListener(delegate { OpenPopup(QuitPopup_Object); });
 
         if (NoQuit_Button) NoQuit_Button.onClick.RemoveAllListeners();
-        if (NoQuit_Button) NoQuit_Button.onClick.AddListener(delegate { if(!isExit) ClosePopup(QuitPopup_Object); });
+        if (NoQuit_Button) NoQuit_Button.onClick.AddListener(delegate { if (!isExit) ClosePopup(QuitPopup_Object); });
 
         if (CancelQuit_Button) CancelQuit_Button.onClick.RemoveAllListeners();
-        if (CancelQuit_Button) CancelQuit_Button.onClick.AddListener(delegate { if(!isExit) ClosePopup(QuitPopup_Object); });
+        if (CancelQuit_Button) CancelQuit_Button.onClick.AddListener(delegate { if (!isExit) ClosePopup(QuitPopup_Object); });
 
         if (YesQuit_Button) YesQuit_Button.onClick.RemoveAllListeners();
         if (YesQuit_Button) YesQuit_Button.onClick.AddListener(CallOnExitFunction);
@@ -245,7 +246,7 @@ public class UIManager : MonoBehaviour
         ClosePopupTween = DOVirtual.DelayedCall(6f, () =>
         {
             ClosePopup(WinPopup_Object);
-            Win_Text.text="";
+            Win_Text.text = "";
             // if (WinPopup_Object) WinPopup_Object.SetActive(false);
 
             // if (!disconnecitonPopUp_object.activeSelf)
@@ -260,14 +261,39 @@ public class UIManager : MonoBehaviour
     }
 
 
-    internal void DisconnectionPopup(bool isReconnection)
-    {
+    // internal void DisconnectionPopup(bool isReconnection)
+    // {
 
+    //     if (!isExit)
+    //     {
+    //         OpenPopup(disconnecitonPopUp_object);
+    //     }
+
+    // }
+
+    internal void DisconnectionPopup()
+    {
         if (!isExit)
         {
             OpenPopup(disconnecitonPopUp_object);
         }
+    }
 
+    internal void ReconnectionPopup()
+    {
+        OpenPopup(reconnecitonPopUp_object);
+    }
+
+    internal void CheckAndClosePopups()
+    {
+        if (reconnecitonPopUp_object.activeInHierarchy)
+        {
+            ClosePopup(reconnecitonPopUp_object);
+        }
+        if (disconnecitonPopUp_object.activeInHierarchy)
+        {
+            ClosePopup(disconnecitonPopUp_object);
+        }
     }
     internal void ADfunction()
     {
@@ -293,7 +319,7 @@ public class UIManager : MonoBehaviour
         if (audioController) audioController.PlayButtonAudio();
 
         if (Popup) Popup.SetActive(false);
-        if (!disconnecitonPopUp_object.activeSelf) 
+        if (!disconnecitonPopUp_object.activeSelf)
         {
             if (MainPopup_Object) MainPopup_Object.SetActive(false);
         }

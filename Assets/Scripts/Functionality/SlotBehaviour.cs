@@ -773,7 +773,8 @@ public class SlotBehaviour : MonoBehaviour
 
     internal void CallCloseSocket()
     {
-        SocketManager.CloseWebSocket();
+        // SocketManager.CloseWebSocket();
+        StartCoroutine(SocketManager.CloseSocket());
     }
 
     //internal void CheckBonusGame()
