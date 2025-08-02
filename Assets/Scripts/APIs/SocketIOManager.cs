@@ -254,7 +254,11 @@ public class SocketIOManager : MonoBehaviour
         lastPongTime = Time.time;
         SendPing();
     }
-
+     void CloseGame()
+    {
+        Debug.Log("Unity: Closing Game");
+        StartCoroutine(CloseSocket());
+    }
     private void SendPing()
     {
         ResetPingRoutine();
