@@ -407,6 +407,7 @@ public class SlotBehaviour : MonoBehaviour
         if (BetperLine_text) BetperLine_text.text = SocketManager.initialData.bets[BetCounter].ToString();
         if (TotalBet_text) TotalBet_text.text = (SocketManager.initialData.bets[BetCounter] * SocketManager.initialData.lines.Count).ToString();
         currentTotalBet = SocketManager.initialData.bets[BetCounter] * SocketManager.initialData.lines.Count;
+        uiManager.InitialiseUIData(SocketManager.initUIData.paylines);
 
     }
 
