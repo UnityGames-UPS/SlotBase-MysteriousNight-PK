@@ -268,7 +268,39 @@ public class SlotBehaviour : MonoBehaviour
                 Tempimages[i].slotImages[j].sprite = myImages[randomIndex];
             }
         }
+
+        // SetWinningMatrix();
+        // PlaywinningMatrixAnim();
     }
+    internal void SetWinningMatrix()
+    {
+        for (int row = 0; row < 3; row++)
+        {
+            for (int col = 0; col < 5; col++)
+            {
+                int value = SocketManager.Winmatrix[row, col];
+                Tempimages[col].slotImages[row].sprite = myImages[value];
+                PopulateAnimationSprites(Tempimages[col].slotImages[row].GetComponent<ImageAnimation>(), value);
+                 UnityEngine.Debug.Log($"Row {row}, Col {col} = {value}");
+
+            }
+        }
+    }
+
+    internal void PlaywinningMatrixAnim()
+    {
+        for (int row = 0; row < 3; row++)
+        {
+            for (int col = 0; col < 5; col++)
+            {
+                int value = SocketManager.Winmatrix[row, col];
+                StartGameAnimation(Tempimages[col].slotImages[row].gameObject);
+
+            }
+        }
+    }
+
+
 
     internal void SetInitialUI()
     {
@@ -668,6 +700,7 @@ public class SlotBehaviour : MonoBehaviour
             StopSpin_Button.gameObject.SetActive(false);
             SlotStart_Button.gameObject.SetActive(true);
         }
+        if (IsTurboOn) StopSpinToggle = true;
 
         for (int i = 0; i < numberOfSlots; i++)
         {
@@ -710,21 +743,22 @@ public class SlotBehaviour : MonoBehaviour
         BalanceTween?.Kill();
         if (TotalWin_text) TotalWin_text.text = SocketManager.resultData.payload.winAmount.ToString("f3");
         if (Balance_text) Balance_text.text = SocketManager.resultData.player.balance.ToString("f3");
+        currentBalance = SocketManager.resultData.player.balance;
         if (SocketManager.resultData.bonus.isTriggered)
         {
             yield return new WaitForSeconds(0.5f);
             _bonusManager.ChestOpen(); //SocketManager.resultData.BonusResult, SocketManager.initialData.bets[BetCounter]
 
         }
-        else if (SocketManager.resultData.payload.winAmount >= bet * 10 && SocketManager.resultData.payload.winAmount < bet * 15)
+        else if (SocketManager.resultData.payload.winAmount >= bet * 5 && SocketManager.resultData.payload.winAmount < bet * 10)
         {
             uiManager.PopulateWin(1, SocketManager.resultData.payload.winAmount);
         }
-        else if (SocketManager.resultData.payload.winAmount >= bet * 15 && SocketManager.resultData.payload.winAmount < bet * 20)
+        else if (SocketManager.resultData.payload.winAmount >= bet * 10 && SocketManager.resultData.payload.winAmount < bet * 15)
         {
             uiManager.PopulateWin(2, SocketManager.resultData.payload.winAmount);
         }
-        else if (SocketManager.resultData.payload.winAmount >= bet * 20)
+        else if (SocketManager.resultData.payload.winAmount >= bet * 15)
         {
             uiManager.PopulateWin(3, SocketManager.resultData.payload.winAmount);
         }
@@ -737,6 +771,7 @@ public class SlotBehaviour : MonoBehaviour
         yield return new WaitUntil(() => !CheckPopups);
         if (TotalWin_text) TotalWin_text.text = SocketManager.resultData.payload.winAmount.ToString("f3");
         if (Balance_text) Balance_text.text = SocketManager.resultData.player.balance.ToString("f3");
+        currentBalance = SocketManager.resultData.player.balance;
         print("checkpopups, " + CheckPopups);
         if (!IsAutoSpin)
         {

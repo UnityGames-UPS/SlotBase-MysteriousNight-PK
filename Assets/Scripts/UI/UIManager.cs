@@ -32,6 +32,9 @@ public class UIManager : MonoBehaviour
     private Image Info_Image;
     [SerializeField]
     private TMP_Text[] SymbolsText;
+   [SerializeField] private TMP_Text[] SymbolsText1;
+    [SerializeField] private TMP_Text[] SymbolsText2;
+
     [SerializeField]
     private TMP_Text m_Wild_Text;
     [SerializeField]
@@ -338,17 +341,16 @@ public class UIManager : MonoBehaviour
             string text = null;
             if (paylines.symbols[i].multiplier[0] != 0)
             {
-                text += (paylines.symbols[i].multiplier[0]*socketIOManager.initialData.bets[slotManager.BetCounter]) + "x";
+                if (SymbolsText[i]) SymbolsText[i].text = (paylines.symbols[i].multiplier[0] * socketIOManager.initialData.bets[slotManager.BetCounter]) + "x";
             }
             if (paylines.symbols[i].multiplier[1] != 0)
             {
-                text += "\n " + (paylines.symbols[i].multiplier[1]*socketIOManager.initialData.bets[slotManager.BetCounter]) + "x";
+                if (SymbolsText1[i]) SymbolsText1[i].text = (paylines.symbols[i].multiplier[1] * socketIOManager.initialData.bets[slotManager.BetCounter]) + "x";
             }
             if (paylines.symbols[i].multiplier[2] != 0)
             {
-                text += "\n" + (paylines.symbols[i].multiplier[2]*socketIOManager.initialData.bets[slotManager.BetCounter]) + "x";
+                 if (SymbolsText2[i]) SymbolsText2[i].text =  (paylines.symbols[i].multiplier[2] * socketIOManager.initialData.bets[slotManager.BetCounter]) + "x";
             }
-            if (SymbolsText[i]) SymbolsText[i].text = text;
         }
 
         for (int i = 0; i < paylines.symbols.Count; i++)

@@ -73,6 +73,14 @@ public class SocketIOManager : MonoBehaviour
     private Coroutine PingRoutine; //Back2 end
     [SerializeField] private GameObject RaycastBlocker;
 
+    internal int[,] Winmatrix = new int[3, 5]
+  {
+        { 2, 7, 7, 7, 2 },
+        { 4, 7, 7, 7, 4 },
+        { 5, 7, 7, 7, 5 }
+
+  };
+
     private void Start()
     {
         SetInit = false;
@@ -254,7 +262,7 @@ public class SocketIOManager : MonoBehaviour
         lastPongTime = Time.time;
         SendPing();
     }
-     void CloseGame()
+    void CloseGame()
     {
         Debug.Log("Unity: Closing Game");
         StartCoroutine(CloseSocket());
