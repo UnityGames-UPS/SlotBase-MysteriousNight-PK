@@ -32,7 +32,7 @@ public class UIManager : MonoBehaviour
     private Image Info_Image;
     [SerializeField]
     private TMP_Text[] SymbolsText;
-   [SerializeField] private TMP_Text[] SymbolsText1;
+    [SerializeField] private TMP_Text[] SymbolsText1;
     [SerializeField] private TMP_Text[] SymbolsText2;
 
     [SerializeField]
@@ -241,9 +241,9 @@ public class UIManager : MonoBehaviour
         if (WinPopup_Object) WinPopup_Object.SetActive(true);
         if (MainPopup_Object) MainPopup_Object.SetActive(true);
 
-        WinPopupTextTween = DOTween.To(() => initAmount, (val) => initAmount = val, (int)amount, 5f).OnUpdate(() =>
+        WinPopupTextTween = DOTween.To(() => initAmount, (val) => initAmount = val, amount, 5f).OnUpdate(() =>
         {
-            if (Win_Text) Win_Text.text = initAmount.ToString("F3");
+        if (Win_Text) Win_Text.text = initAmount.ToString("F3");
         });
 
         ClosePopupTween = DOVirtual.DelayedCall(6f, () =>
@@ -349,7 +349,7 @@ public class UIManager : MonoBehaviour
             }
             if (paylines.symbols[i].multiplier[2] != 0)
             {
-                 if (SymbolsText2[i]) SymbolsText2[i].text =  (paylines.symbols[i].multiplier[2] * socketIOManager.initialData.bets[slotManager.BetCounter]) + "x";
+                if (SymbolsText2[i]) SymbolsText2[i].text = (paylines.symbols[i].multiplier[2] * socketIOManager.initialData.bets[slotManager.BetCounter]) + "x";
             }
         }
 
