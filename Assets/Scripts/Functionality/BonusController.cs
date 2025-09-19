@@ -59,7 +59,7 @@ public class BonusController : MonoBehaviour
 
     internal void GameOver()
     {
-        win_text.text = totalWin.ToString("f2");
+        win_text.text = totalWin.ToString("f3");
 
         BonusWinObject.localScale = Vector3.zero;
         BonusWin.SetActive(true);

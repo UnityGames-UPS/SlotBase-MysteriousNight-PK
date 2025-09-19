@@ -601,7 +601,7 @@ public class SlotBehaviour : MonoBehaviour
 
     private IEnumerator TweenRoutine()
     {
-        TotalWin_text.text = "0.00";
+        TotalWin_text.text = "0.000";
         dynamicLinesIndex.Clear();
         gambleController.GambleTweeningAnim(false);
         if (currentBalance < currentTotalBet)
