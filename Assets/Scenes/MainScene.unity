@@ -963,7 +963,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 868.6
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 2340, y: 1080}
+  m_ReferenceResolution: {x: 2340, y: 1180}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
@@ -3549,7 +3549,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 165, y: 0}
+  m_AnchoredPosition: {x: 165, y: 20}
   m_SizeDelta: {x: 270, y: 89}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &250869476
@@ -4013,7 +4013,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -160, y: 0}
+  m_AnchoredPosition: {x: -160, y: 20}
   m_SizeDelta: {x: 270, y: 89}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &300216542
@@ -6954,7 +6954,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotManager: {fileID: 2046803210}
   uiManager: {fileID: 377874625}
-  testToken: a16ffa685255453682f8d0a2e05c3078
+  testToken: 7e873b1ecc3048578b1cf8ed49913a44
   JSManager: {fileID: 1247381830}
   RaycastBlocker: {fileID: 1746709410}
 --- !u!1 &503406890
@@ -16864,7 +16864,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 500, y: 0}
+  m_AnchoredPosition: {x: 500, y: 20}
   m_SizeDelta: {x: 270, y: 89}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1185147718
@@ -26206,7 +26206,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -500, y: 0}
+  m_AnchoredPosition: {x: -500, y: 20}
   m_SizeDelta: {x: 270, y: 89}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1875410689
