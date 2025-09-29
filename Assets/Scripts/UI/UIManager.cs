@@ -96,13 +96,21 @@ public class UIManager : MonoBehaviour
     internal int FreeSpins;
     private bool isExit = false;
 
+    [SerializeField]
+    private GameObject[] Info_Screens;
+    int screenCounter = 0;
+    [SerializeField]
+    private Button lastArrLeft_Button;
+    [SerializeField]
+    private Button lastArrRight_Button;
+
     private void Start()
     {
         if (PaytableExit_Button) PaytableExit_Button.onClick.RemoveAllListeners();
         if (PaytableExit_Button) PaytableExit_Button.onClick.AddListener(delegate { ClosePopup(PaytablePopup_Object); });
 
         if (Info_Button) Info_Button.onClick.RemoveAllListeners();
-        if (Info_Button) Info_Button.onClick.AddListener(delegate { OpenPopup(PaytablePopup_Object); });
+        if (Info_Button) Info_Button.onClick.AddListener(delegate { screenCounter = 1; ChangePage(false); OpenPopup(PaytablePopup_Object);});
 
 
         if (LBExit_Button) LBExit_Button.onClick.RemoveAllListeners();
@@ -140,6 +148,12 @@ public class UIManager : MonoBehaviour
 
         if (SkipWinAnimation) SkipWinAnimation.onClick.RemoveAllListeners();
         if (SkipWinAnimation) SkipWinAnimation.onClick.AddListener(SkipWin);
+
+         if (lastArrRight_Button) lastArrRight_Button.onClick.RemoveAllListeners();
+        if (lastArrRight_Button) lastArrRight_Button.onClick.AddListener(delegate { ChangePage(true); });
+
+        if (lastArrLeft_Button) lastArrLeft_Button.onClick.RemoveAllListeners();
+        if (lastArrLeft_Button) lastArrLeft_Button.onClick.AddListener(delegate { ChangePage(false); });
     }
 
     private void ToggleMusic()
@@ -243,7 +257,7 @@ public class UIManager : MonoBehaviour
 
         WinPopupTextTween = DOTween.To(() => initAmount, (val) => initAmount = val, amount, 5f).OnUpdate(() =>
         {
-        if (Win_Text) Win_Text.text = initAmount.ToString("F3");
+            if (Win_Text) Win_Text.text = initAmount.ToString("F3");
         });
 
         ClosePopupTween = DOVirtual.DelayedCall(6f, () =>
@@ -364,6 +378,38 @@ public class UIManager : MonoBehaviour
                 if (m_Bonus_Text) m_Bonus_Text.text = paylines.symbols[i].description.ToString();
             }
         }
+    }
+
+    private void ChangePage(bool Increment)
+    {
+        foreach (GameObject t in Info_Screens)
+        {
+            t.SetActive(false);
+        }
+
+        if (Increment)
+        {
+            if (screenCounter == Info_Screens.Length - 1)
+            {
+                screenCounter = 0;
+            }
+            else
+            {
+                screenCounter++;
+            }
+        }
+        else
+        {
+            if (screenCounter == 0)
+            {
+                screenCounter = Info_Screens.Length - 1;
+            }
+            else
+            {
+                screenCounter--;
+            }
+        }
+        Info_Screens[screenCounter].SetActive(true);
     }
 
 
